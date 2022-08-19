@@ -1,0 +1,51 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>Bleezing</PageTitle>
+
+<Layout>
+    <LayoutHeader>
+        <Bar Breakpoint="Breakpoint.Desktop"
+             Background="Background.Light"
+             ThemeContrast="ThemeContrast.Light">
+            <BarBrand>
+                Shell of KzAkeley
+            </BarBrand>
+            <BarToggler />
+            <BarMenu>
+                <BarStart>
+                    <BarItem>
+                        <BarLink To="#home">Home</BarLink>
+                    </BarItem>
+                    <BarItem>
+                        <BarLink To="#docs">Blog</BarLink>
+                    </BarItem>
+                    <BarItem>
+                        <BarDropdown>
+                            <BarDropdownToggle>Tools</BarDropdownToggle>
+                            <BarDropdownMenu>
+                                <BarDropdownItem>Server Management</BarDropdownItem>
+                                <BarDropdownItem>Aria2 GUI</BarDropdownItem>
+                            </BarDropdownMenu>
+                        </BarDropdown>
+                    </BarItem>
+                </BarStart>
+                <BarEnd>
+                    <BarItem>
+                        <Button Color="Color.Secondary">Sign in</Button>
+                    </BarItem>
+                </BarEnd>
+            </BarMenu>
+        </Bar>
+    </LayoutHeader>
+    <LayoutContent>
+        <Container Fluid>
+            @Body
+        </Container>
+    </LayoutContent>
+    <LayoutFooter>
+        <div style="text-align:right; font-size: 12px; padding: 5px 10px 5px">
+        Kozukata Akeley Personal Website <br/>
+        KERNEL IN THE SHELL
+        </div>
+    </LayoutFooter>
+</Layout>

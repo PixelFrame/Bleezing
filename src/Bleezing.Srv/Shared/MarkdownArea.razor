@@ -1,0 +1,8 @@
+﻿@renderedMarkdown
+
+@code {
+    [Parameter]
+    public string? srcUrl { get; set; }
+    private string rawMarkdown { get; set; } = "#### Loading...";
+    private MarkupString renderedMarkdown { get; set; }
+}
