@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Blazorise;
 using Blazorise.Bootstrap;
-using Blazorise.Icons.FontAwesome;
 using Bleezing.Srv.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +14,7 @@ builder.Services
     {
         options.Immediate = true;
     })
-    .AddBootstrapProviders()
-    .AddFontAwesomeIcons();
+    .AddBootstrapProviders();
 builder.Services.AddSingleton<ArticleRenderService>();
 
 var app = builder.Build();

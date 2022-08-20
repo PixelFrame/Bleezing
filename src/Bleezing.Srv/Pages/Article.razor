@@ -1,7 +1,26 @@
 ﻿@page "/Article"
 @page "/Article/{Title}"
 
+@inject ArticleRenderService arsvc
+
+<DynamicComponent Type="@contentType" Parameters="@contentParam"></DynamicComponent>
+
 @code {
     [Parameter]
     public string? Title { get; set; }
+
+    private Type contentType = typeof(LoadingPrompt);
+    private Dictionary<string, object> contentParam = new() {
+            ["Message"] = "Loading content..."
+    };
+
+    private async Task RenderContent()
+    {
+        if(Title==null) { await RenderList(); }
+    }
+
+    private async Task RenderList()
+    {
+
+    }
 }

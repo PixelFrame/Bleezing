@@ -14,10 +14,10 @@
             <BarMenu>
                 <BarStart>
                     <BarItem>
-                        <BarLink To="#home">Home</BarLink>
+                        <BarLink To="/">Home</BarLink>
                     </BarItem>
                     <BarItem>
-                        <BarLink To="#docs">Blog</BarLink>
+                        <BarLink To="/Article">Blog</BarLink>
                     </BarItem>
                     <BarItem>
                         <BarDropdown>
@@ -42,10 +42,8 @@
             @Body
         </Container>
     </LayoutContent>
-    <LayoutFooter>
-        <div style="text-align:right; font-size: 12px; padding: 5px 10px 5px">
-        Kozukata Akeley Personal Website <br/>
-        KERNEL IN THE SHELL
-        </div>
+    <LayoutFooter Style="background-color:azure; height:100px; text-align: right; padding: 10px 20px 10px 20px">
+            <Text>KERNEL IN THE SHELL</Text> <br />
+            <Blazorise.Link Target="Target.Blank" To="https://github.com/PixelFrame/"><i class="fa-brands fa-github" /> PixelFrame</Blazorise.Link>
     </LayoutFooter>
 </Layout>

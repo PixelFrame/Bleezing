@@ -1,0 +1,11 @@
+﻿<Div Style="text-align:center">
+    <Span>
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+        <Text>@Message</Text>
+    </Span>
+</Div>
+
+@code {
+    [Parameter]
+    public string Message { get; set; } = "Loading";
+}
