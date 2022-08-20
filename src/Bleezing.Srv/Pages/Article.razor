@@ -1,7 +1,8 @@
 ﻿@page "/Article"
 @page "/Article/{Title}"
 
-@inject ArticleRenderService arsvc
+@using Bleezing.Srv.Data.Model
+@inject ArticleService arsvc
 
 <DynamicComponent Type="@contentType" Parameters="@contentParam"></DynamicComponent>
 
@@ -10,16 +11,60 @@
     public string? Title { get; set; }
 
     private Type contentType = typeof(LoadingPrompt);
-    private Dictionary<string, object> contentParam = new() {
+    private Dictionary<string, object> contentParam = new()
+        {
             ["Message"] = "Loading content..."
-    };
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RenderContent();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await RenderContent();
+    }
 
     private async Task RenderContent()
     {
-        if(Title==null) { await RenderList(); }
+        if (Title == null)
+        {
+            await RenderList();
+            return;
+        }
+        var article = await arsvc.GetArticleByTitleAsync(Title);
+        if (article is Post post) { await RenderPost(post); return; }
+        if (article is MarkdownPost mdpost) { await RenderMarkdownPost(mdpost); return; }
+        if (article is Album album) { await RenderAlbum(album); return; }
+        if (article is MediaPost mediapost) { await RenderMediaPost(mediapost); return; }
     }
 
     private async Task RenderList()
+    {
+
+    }
+
+    private async Task RenderPost(Post post)
+    {
+    }
+
+    private async Task RenderMarkdownPost(MarkdownPost mdpost)
+    {
+
+        contentType = typeof(MarkdownArea);
+        contentParam = new()
+            {
+                ["RawMarkdown"] = mdpost.Content
+            };
+    }
+
+    private async Task RenderAlbum(Album album)
+    {
+
+    }
+
+    private async Task RenderMediaPost(MediaPost mediapost)
     {
 
     }

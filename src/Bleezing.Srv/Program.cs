@@ -15,7 +15,7 @@ builder.Services
         options.Immediate = true;
     })
     .AddBootstrapProviders();
-builder.Services.AddSingleton<ArticleRenderService>();
+builder.Services.AddSingleton<ArticleService>();
 
 var app = builder.Build();
 

@@ -1,6 +1,17 @@
-﻿@renderedMarkdown
+﻿@using Markdig
+
+<div class="markdown">
+    @RenderedMarkdown
+</div>
 
 @code {
-    private string rawMarkdown { get; set; } = "#### Loading...";
-    private MarkupString renderedMarkdown { get; set; }
+    [Parameter]
+    public string RawMarkdown { get; set; } = "# No Content";
+    private MarkupString RenderedMarkdown { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+        RenderedMarkdown = (MarkupString)Markdown.ToHtml(RawMarkdown, pipeline);
+    }
 }
