@@ -51,7 +51,6 @@
 
     private async Task RenderMarkdownPost(MarkdownPost mdpost)
     {
-
         contentType = typeof(MarkdownArea);
         contentParam = new()
             {
@@ -61,11 +60,18 @@
 
     private async Task RenderAlbum(Album album)
     {
-
+        contentType = typeof(AlbumArea);
+        contentParam = new()
+            {
+                ["ImgSrcs"] = album.Content
+            };
     }
 
     private async Task RenderMediaPost(MediaPost mediapost)
     {
-
+        contentType = typeof(MediaArea);
+        contentParam = new()
+            {
+            };
     }
 }

@@ -1,0 +1,14 @@
+﻿<Carousel @bind-SelectedSlide="@selectedSlide">
+    @foreach (var img in ImgSrcs)
+    {
+        <CarouselSlide>
+            <Image Source="@img" Display="Display.Block" Width="Width.Is100" />
+        </CarouselSlide>
+    }
+</Carousel>
+
+@code {
+    [Parameter]
+    public List<string> ImgSrcs { get; set; } = new();
+    private string? selectedSlide;
+}
