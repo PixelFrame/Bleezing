@@ -54,7 +54,7 @@
         contentType = typeof(MarkdownArea);
         contentParam = new()
             {
-                ["RawMarkdown"] = mdpost.Content
+                ["RawMarkdown"] = mdpost.RawMarkdown
             };
     }
 
@@ -63,7 +63,7 @@
         contentType = typeof(AlbumArea);
         contentParam = new()
             {
-                ["ImgSrcs"] = album.Content
+                ["ImgSrcs"] = album.ImgSrcs
             };
     }
 
@@ -72,6 +72,8 @@
         contentType = typeof(MediaArea);
         contentParam = new()
             {
+                ["Src"] = mediapost.Src,
+                ["Uri"] = mediapost.Uri
             };
     }
 }

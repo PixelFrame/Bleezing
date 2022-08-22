@@ -8,6 +8,6 @@ namespace Bleezing.Srv.Data.Model
         public List<string> Tags { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastModifiedAt { get; set; }
-        public object? Content { get; set; }
+        public string Content { get; set; }
     }
 }

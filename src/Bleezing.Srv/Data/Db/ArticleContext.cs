@@ -15,13 +15,19 @@ namespace Bleezing.Srv.Data.Db
             Debug.WriteLine($"{ContextId} context created.");
         }
         
-        public DbSet<IArticle>? articles { get; set; }
+        public DbSet<Article>? articles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<IArticle>()
+            modelBuilder.Entity<Article>()
                 .Property<byte[]>(RowVersion)
                 .IsRowVersion();
+
+            modelBuilder.Entity<Article>()
+                .Property(e => e.Tags)
+                .HasConversion(
+                        v => string.Join(',', v),
+                        v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList() ?? new List<string>());
 
             base.OnModelCreating(modelBuilder);
         }
