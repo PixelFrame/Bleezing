@@ -1,5 +1,40 @@
 ﻿@page "/Test"
+@using Bleezing.Srv.Data.Db
+@using Bleezing.Srv.Data.Model
+@inject ArticleContext _context
+
+<Button Clicked="CreatePosts">Create Posts</Button> <br />
+
+@foreach (var article in articles)
+{
+    <Text>@article.Title</text> <br/>
+}
 
 @code {
+    private List<Data.Model.Article> articles = new();
+    protected override void OnInitialized()
+    {
+        articles.AddRange(_context.articles!);
+    }
+    private void CreatePosts()
+    {
+        _context.Add(new MarkdownPost()
+            {
+                Title = "Test Doc 1",
+                Content = "# Test Doc 1"
+            });
+        _context.Add(new MarkdownPost()
+            {
 
+                Title = "Test Doc 2",
+                Content = "# Test Doc 2"
+            });
+        _context.Add(new MarkdownPost()
+            {
+
+                Title = "Test Doc 3",
+                Content = "# Test Doc 3"
+            });
+        _context.SaveChanges();
+    }
 }
