@@ -15,5 +15,15 @@ namespace Bleezing.Srv.Data.Model
         public DateTime LastModifiedAt { get; set; } = DateTime.Now;
         [Required]
         public string Content { get; set; } = "No Content";
+
+        public ArticleType Type = 0;
+
+        public enum ArticleType
+        {
+            Post = 0,
+            MarkdownPost = 1,
+            Album = 2,
+            MediaPost = 3
+        }
     }
 }

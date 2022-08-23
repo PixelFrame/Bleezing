@@ -4,6 +4,7 @@
 @inject ArticleContext _context
 
 <Button Clicked="CreatePosts">Create Posts</Button> <br />
+<Button Clicked="ClearAll">Clear All</Button> <br />
 
 @foreach (var article in articles)
 {
@@ -31,10 +32,14 @@
             });
         _context.Add(new MarkdownPost()
             {
-
                 Title = "Test Doc 3",
                 Content = "# Test Doc 3"
             });
+        _context.SaveChanges();
+    }
+    private void ClearAll()
+    {
+        _context.RemoveRange(_context.articles!);
         _context.SaveChanges();
     }
 }

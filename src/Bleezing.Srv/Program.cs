@@ -18,7 +18,7 @@ builder.Services
         options.Immediate = true;
     })
     .AddBootstrapProviders();
-builder.Services.AddSingleton<ArticleService>();
+builder.Services.AddScoped<ArticleService>();
 builder.Services.AddDbContext<ArticleContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("ArticlesDb")));
 

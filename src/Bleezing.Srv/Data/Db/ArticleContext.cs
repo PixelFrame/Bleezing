@@ -29,6 +29,10 @@ namespace Bleezing.Srv.Data.Db
                         v => string.Join(',', v),
                         v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList() ?? new List<string>());
 
+            modelBuilder.Entity<Article>()
+                .Property(e => e.Type)
+                .HasConversion<int>();
+
             base.OnModelCreating(modelBuilder);
         }
 
