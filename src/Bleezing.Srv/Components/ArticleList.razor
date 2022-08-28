@@ -15,11 +15,87 @@
     }
 </ListGroup>
 
+<Pagination>
+    <PaginationItem Disabled="@IsPageNavigationDisabled(PREVIOUS)" @onclick="Previous">
+        <PaginationLink>
+            <span aria-hidden="true">«</span>
+        </PaginationLink>
+    </PaginationItem>
+    @{
+        for (var i = 1; i <= maxPageNum; i++)
+        {
+            var pageNumberAsString = i.ToString();
+            <PaginationItem @key="pageNumberAsString" Active="@IsActive(pageNumberAsString)">
+                <PaginationLink Page="@pageNumberAsString" Clicked="SetActiveAsync">
+                    @pageNumberAsString
+                </PaginationLink>
+            </PaginationItem>
+        } 
+    }
+    <PaginationItem Disabled="@IsPageNavigationDisabled(NEXT)" @onclick="NextAsync">
+        <PaginationLink>
+            <span aria-hidden="true">»</span>
+        </PaginationLink>
+    </PaginationItem>
+</Pagination>
+
 @code {
     private List<Article> currentPage = new();
+    private const string PREVIOUS = "previous";
+    private const string NEXT = "next";
+    [Parameter]
+    public string currentPageNum { get; set; } = "1";
+    private int maxPageNum = 1;
+    private int perPageCount = 1;
 
     protected override async Task OnInitializedAsync()
     {
-        currentPage.AddRange(await arsvc.GetArticlesPageAsync(10, 0));
+        var articleCnt = arsvc.GetArticleCount();
+        maxPageNum = articleCnt / perPageCount;
+        currentPage.AddRange(await arsvc.GetArticlesPageAsync(perPageCount, 0));
+    }
+
+    private bool IsActive(string page)
+        => currentPageNum == page;
+
+    private bool IsPageNavigationDisabled(string navigation)
+    {
+        if (navigation.Equals(PREVIOUS))
+        {
+            return currentPageNum.Equals("1");
+        }
+        else if (navigation.Equals(NEXT))
+        {
+            return currentPageNum.Equals(maxPageNum.ToString());
+        }
+        return false;
+    }
+
+    private void Previous()
+    {
+        var currentPageAsInt = int.Parse(currentPageNum);
+        if (currentPageAsInt > 1)
+        {
+            currentPageNum = (currentPageAsInt - 1).ToString();
+        }
+    }
+
+    private async Task NextAsync()
+    {
+        var currentPageAsInt = int.Parse(currentPageNum);
+        if (currentPageAsInt < maxPageNum)
+        {
+            currentPage.Clear();
+            currentPage.AddRange(await arsvc.GetArticlesPageAsync(perPageCount, currentPageAsInt * perPageCount));
+            currentPageNum = (currentPageAsInt + 1).ToString();
+        }
+    }
+
+    private async Task SetActiveAsync(string page)
+    {
+        var pageAsInt = int.Parse(page);
+        currentPage.Clear();
+        currentPage.AddRange(await arsvc.GetArticlesPageAsync(perPageCount, (pageAsInt - 1) * perPageCount));
+        currentPageNum = page;
     }
 }

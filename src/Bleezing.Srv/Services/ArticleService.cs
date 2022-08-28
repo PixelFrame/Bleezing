@@ -47,5 +47,10 @@ The requested article is not available."
                 .ToListAsync();
             return nextPage;
         }
+
+        public int GetArticleCount()
+        {
+            return context.articles!.Count();
+        }
     }
 }

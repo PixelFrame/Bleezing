@@ -1,13 +1,16 @@
-﻿@page "/Article"
+﻿@page "/Articles"
+@page "/Articles/{Page}"
 @page "/Article/{Title}"
 
 @using Bleezing.Srv.Data.Model
 @inject ArticleService arsvc
 @inject IJSRuntime jsrt
 
-<DynamicComponent Type="@contentType" Parameters="@contentParam" hidd></DynamicComponent>
+<DynamicComponent Type="@contentType" Parameters="@contentParam"></DynamicComponent>
 
 @code {
+    [Parameter]
+    public string? Page { get; set; }
     [Parameter]
     public string? Title { get; set; }
 
@@ -48,8 +51,12 @@
 
     private async Task RenderList()
     {
+        if (Page == null) Page = "1";
         contentType = typeof(ArticleList);
-        contentParam = new();
+        contentParam = new()
+            {
+                ["currentPageNum"] = Page
+            };
     }
 
     private async Task RenderPost(Post post)
