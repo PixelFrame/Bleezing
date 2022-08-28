@@ -3,6 +3,7 @@
 
 @using Bleezing.Srv.Data.Model
 @inject ArticleService arsvc
+@inject IJSRuntime jsrt
 
 <DynamicComponent Type="@contentType" Parameters="@contentParam"></DynamicComponent>
 
@@ -24,6 +25,11 @@
     protected override async Task OnParametersSetAsync()
     {
         await RenderContent();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await jsrt.InvokeVoidAsync("prismRenderAll");
     }
 
     private async Task RenderContent()

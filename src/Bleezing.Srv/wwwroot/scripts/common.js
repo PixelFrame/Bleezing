@@ -35,3 +35,7 @@ function downloadFile(filename, contentType, content) {
     URL.revokeObjectURL(exportUrl);
     document.body.removeChild(a);
 }
+
+function prismRenderAll() {
+    Prism.highlightAllUnder(document.body);
+}

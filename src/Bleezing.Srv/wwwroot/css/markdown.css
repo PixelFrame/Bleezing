@@ -206,6 +206,7 @@
   border: 1px solid #eaeaea;
   background-color: #f8f8f8;
   border-radius: 0px;
+  color: #333333;
 }
 .markdown pre code {
   margin: 0;
