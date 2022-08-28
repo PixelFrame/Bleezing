@@ -15,6 +15,7 @@ namespace Bleezing.Srv.Data.Model
         public DateTime LastModifiedAt { get; set; } = DateTime.Now;
         [Required]
         public string Content { get; set; } = "No Content";
+        public string Abstract { get; set; } = "No Abstract";
 
         public ArticleType Type = 0;
 

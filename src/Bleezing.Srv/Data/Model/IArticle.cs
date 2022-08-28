@@ -9,5 +9,6 @@ namespace Bleezing.Srv.Data.Model
         public DateTime CreatedAt { get; set; }
         public DateTime LastModifiedAt { get; set; }
         public string Content { get; set; }
+        public string Abstract { get; set; }
     }
 }

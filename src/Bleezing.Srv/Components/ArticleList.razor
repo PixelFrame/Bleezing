@@ -1,7 +1,25 @@
-﻿<ListGroup>
+﻿@using Bleezing.Srv.Data.Model
+@inject ArticleService arsvc
 
+<ListGroup Flush>
+    @foreach (var article in currentPage)
+    {
+        <ListGroupItem>
+        <Div Flex="Flex.JustifyContent.Between" Width="Width.Is100">
+            <Heading Size="HeadingSize.Is5" Margin="Margin.Is1.FromBottom">@article.Title</Heading>
+            <Small>@article.LastModifiedAt</Small>
+        </Div>
+        <Paragraph Margin="Margin.Is1.FromBottom">@article.Abstract</Paragraph>
+        <Small><a href="Article/@article.Title" target="_parent">Read All</a></Small>
+        </ListGroupItem>
+    }
 </ListGroup>
 
 @code {
+    private List<Article> currentPage = new();
 
+    protected override async Task OnInitializedAsync()
+    {
+        currentPage.AddRange(await arsvc.GetArticlesPageAsync(10, 0));
+    }
 }

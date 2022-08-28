@@ -5,7 +5,7 @@
 @inject ArticleService arsvc
 @inject IJSRuntime jsrt
 
-<DynamicComponent Type="@contentType" Parameters="@contentParam"></DynamicComponent>
+<DynamicComponent Type="@contentType" Parameters="@contentParam" hidd></DynamicComponent>
 
 @code {
     [Parameter]
@@ -48,11 +48,14 @@
 
     private async Task RenderList()
     {
-
+        contentType = typeof(ArticleList);
+        contentParam = new();
     }
 
     private async Task RenderPost(Post post)
     {
+        contentType = typeof(NotImplementedPrompt);
+        contentParam = new();
     }
 
     private async Task RenderMarkdownPost(MarkdownPost mdpost)

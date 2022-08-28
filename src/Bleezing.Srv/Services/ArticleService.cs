@@ -16,7 +16,7 @@ namespace Bleezing.Srv.Services
             this.context = context;
         }
 
-        public async Task<IArticle> GetArticleByTitleAsync(string title)
+        public async Task<Article> GetArticleByTitleAsync(string title)
         {
             var result = await context.articles!.FirstOrDefaultAsync(a => a.Title == title);
             if (result == null)
@@ -36,6 +36,16 @@ The requested article is not available."
                 }
                 return result;
             }
+        }
+
+        public async Task<List<Article>> GetArticlesPageAsync(int count, int pos)
+        {
+            var nextPage = await context.articles!
+                .OrderByDescending(a => a.CreatedAt)
+                .Skip(pos)
+                .Take(count)
+                .ToListAsync();
+            return nextPage;
         }
     }
 }
